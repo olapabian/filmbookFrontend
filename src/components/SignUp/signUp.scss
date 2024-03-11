@@ -1,0 +1,115 @@
+@import "../../scss/colors.scss";
+.overlay-signup{
+    background-color: rgb(178, 162, 223);
+    opacity: 0.7;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+}
+.signup{
+    position: absolute;
+    z-index: 10;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    // background-color: $secondary-clr ;
+    
+    box-shadow: 0px 0px 5px 0px rgba($color: #351297, $alpha: 1.0);
+    border-radius: 10px;
+    padding: 15px;
+    height: 600px;
+    width: 500px;    
+    margin-top: -70px;
+
+    display: flex;
+    flex-direction: row;
+}
+.signup-container{
+}
+.signup-top {
+    display: flex;
+    flex-direction: row;
+    
+}
+
+.close-icon-div {
+    display: flex;
+    flex-direction: row; 
+    justify-content: center; 
+    margin-right: 0px;
+}
+
+.signup-header{
+    display: flex;
+    flex-direction: row;
+    justify-content: center; 
+    align-items: center; 
+    margin-right: 250px;
+    h1{
+        color: #b6b3bd;
+    }
+}
+.signup-separator{
+    height: 30px;
+}
+.signup-fields{
+    width: 100%;
+    align-items: center;
+}
+.signup-inputs{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    input{
+        background-color: #2d1f51;
+        width: 100%;
+        height: 40px;
+        padding: 10px;
+        outline: none;
+        border: 1px solid $pr-gray;
+        border-radius: 7px;
+        font-size: 20px;
+        margin-right: 0px;
+        margin-bottom: 15px;
+        &:hover {
+            border: 1px solid $primary-clr;
+        }
+    }
+}
+.signup-text{
+
+}
+.signup-checkbox{
+    width: 100%;
+    p{
+        font-size: 25px;
+        text-align:left; // Center the text
+        margin-bottom: 10px; // Add some space after the text
+        margin-left: 10px;
+        margin-top: 10px;
+        color: #b6b3bd;
+    }
+    .gender-input {
+        display: flex;
+        flex-direction: row;
+        margin-left: -14px;
+        text-align: center;
+        color: #b6b3bd;
+        label {
+            display: flex;
+            flex-direction: row;
+            margin-bottom: 5px; /* Redukcja odstępu między polami wyboru */
+            margin-left: 25px;
+            input[type="radio"] {
+                margin-right: 10px;
+                margin-top: -10px;
+            }
+        }
+    }
+    
+}
