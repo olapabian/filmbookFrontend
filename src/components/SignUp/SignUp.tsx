@@ -1,10 +1,29 @@
 import React from 'react';
 import "./signUp.scss";
 import { FaWindowClose } from "react-icons/fa";
+
 interface SignUpProps {
-    onClose: () => void; // Definicja typu dla onClose
+    onClose: () => void;
+    onRegister: (firstName: string, lastName: string, username: string, password: string) => void; // Zaktualizowany typ
+    onChangeHandler: (event: React.ChangeEvent<HTMLInputElement>) => void; 
+    onSubmitRegister: (event: React.FormEvent<HTMLFormElement>) => void; 
 }
-const SignUp: React.FC<SignUpProps> = ({ onClose }) =>{
+
+
+
+
+const SignUp: React.FC<SignUpProps> = ({ onClose, onRegister, onChangeHandler, onSubmitRegister }) => { 
+
+    const handleRegister = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
+        event.preventDefault(); 
+        const firstName = "firstName"; 
+        const lastName = "lastName";
+        const username = "username"; 
+        const password = ""; 
+        onRegister(firstName, lastName, username, password);
+    }
+    
+
     return (
         <>
             <div className="overlay-signup"></div>
@@ -17,18 +36,16 @@ const SignUp: React.FC<SignUpProps> = ({ onClose }) =>{
                         <div className="close-icon-div" onClick={onClose}>
                             <FaWindowClose className="close-icon" />
                         </div>
-                        
                     </div>
-                  
                     <div className="signup-separator"></div>
-                    <form action="#">
+                    <form onSubmit={onSubmitRegister}>
                         <div className="signup-fields">
                             <div className="signup-inputs">
                                 <div className="signup-text">
-                                    <input type="text" placeholder='Imie' />
-                                    <input type="text" placeholder='Nazwisko' />
-                                    <input type="text" placeholder='Nazwa Użytkownika' />
-                                    <input type="password" placeholder='Hasło' />
+                                    <input name="firstName" type="text" placeholder='Imie' onChange={onChangeHandler}/>
+                                    <input name="lastName" type="text" placeholder='Nazwisko' onChange={onChangeHandler}/>
+                                    <input name="username" type="text" placeholder='Nazwa Użytkownika' onChange={onChangeHandler}/>
+                                    <input name="password" type="password" placeholder='Hasło' onChange={onChangeHandler}/>
                                 </div>
                                 <div className="signup-checkbox">
                                     <p>Płeć:</p>
@@ -49,7 +66,7 @@ const SignUp: React.FC<SignUpProps> = ({ onClose }) =>{
                                 </div>
                             </div>
                         </div>
-                        <button className="btn-create-acc">Zarejestruj się</button>
+                        <button className="btn-create-acc" onClick={handleRegister}>Zarejestruj się</button>
                     </form>
                 </div>
             </div>

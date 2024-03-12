@@ -67,6 +67,9 @@ $font-size-md: 30px;
         font-size: large;
         color: #340c43;
     }
+    form{
+        height: 100%;
+    }
 }
 .btn-login{
     background-color: rgb(59, 154, 59);
@@ -110,7 +113,7 @@ footer {
     background-color: #17041e;
     h3{
         background-color: #17041e;
-        margin: 0; /* Resetowanie marginesu */
+        margin: 0; 
         color: #795985;
     }
 }
