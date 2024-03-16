@@ -2,8 +2,8 @@ import React, { Component, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import "./login.scss";
 import filmbookLogo from "../../imgs/logos/download.png";
-import SignUp from "../SignUp/SignUp";
-import { requestLogin, requestRegister, setAuthToken } from '../../Helpers/axios_helper';
+import SignUp from "../SignUp/SignUp"
+import { getAuthToken, requestLogin, requestRegister, setAuthToken } from '../../Helpers/axios_helper';
 
 interface LoginState {
     showSignUp: boolean;
@@ -47,12 +47,13 @@ const Login: React.FC<LoginProps> = () => {
         requestLogin("POST", "/login", { username, password })
             .then((response) => {
                 setAuthToken(response.data.token);
+                console.log(getAuthToken());
                 console.log("Udało się zalogować");
-                navigate("/home"); // Redirect to home page
+                navigate("/home"); 
             })
             .catch((error) => {
                 if (error.response && error.response.data && error.response.data.message) {
-                    alert(error.response.data.message); // Display error message
+                    alert(error.response.data.message); 
                 } else {
                     console.log("Nie udało się zalogować");
                 }

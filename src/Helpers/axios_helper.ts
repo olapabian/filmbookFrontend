@@ -48,29 +48,12 @@ export const requestRegister = (method: string, url: string, data: RegisterData 
     });
 };
 
-// import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
-
-// axios.defaults.baseURL = 'http://localhost:8081';
-// axios.defaults.headers.post["Content-Type"] = 'application/json';
-
-// export const getAuthToken = (): string | null => {
-//     return window.localStorage.getItem("auth_token");
-// }
-
-// export const setAuthToken = (token: string): void => {
-//     window.localStorage.setItem("auth_token", token);
-// }
-
-// export const request = <T>(method: AxiosRequestConfig["method"], url: string, data?: any): Promise<AxiosResponse<T>> => {
-//     const headers: { [key: string]: string } = {};
-//     const authToken = getAuthToken();
-//     if (authToken !== null && authToken !== "null") {
-//         headers["Authorization"] = `Bearer ${authToken}`;
-//     }
-//     return axios({
-//         method: method,
-//         url: url,
-//         data: data,
-//         headers: headers
-//     });
-// };
+export const getUserInfo = () => {
+    const token = getAuthToken();
+    return axios.get("/user", {
+      headers: {
+        Authorization: `Bearer ${token}` 
+      }
+    }); 
+  };
+  

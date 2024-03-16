@@ -1,46 +1,48 @@
-import React from "react";
-import { requestLogin } from "../../Helpers/axios_helper";
+import React, { Component } from "react";
+import { getUserInfo } from "../../Helpers/axios_helper";
 
-// interface HomeState {
-//     data: string[];
-// }
-interface HomeState {
-    data: string[];
+interface State {
+  user: { username: string } | null;
 }
 
-export default class Home extends React.Component<{}, HomeState> {
-    constructor(props: {} | Readonly<{}>) {
-        super(props);
-        this.state = {
-            data: []
-        };
-    }
+class Home extends Component<{}, State> {
+  constructor(props: {}) {
+    super(props);
+    this.state = {
+      user: null,
+    };
+  }
 
-    // componentDidMount(): void {
-    //     requestLogin(
-    //         "GET",
-    //         "messages",
-    //         {}
-    //     ).then((response) => {
-    //         if (Array.isArray(response.data)) {
-    //             this.setState({ data: response.data });
-    //         } else {
-    //             console.error("Received data is not an array:", response.data);
-    //         }
-    //     }).catch(error => {
-    //         console.error("Error fetching data:", error);
-    //     });
-    // }
-    
+  componentDidMount() {
+    this.fetchUserData();
+  }
 
-    render() {
-        return (
-            <div>
-                <p>jdfsij</p>
-                {this.state.data && this.state.data.map((line, index) => (
-                    <p key={index}>{line}</p>
-                ))}
-            </div>
-        );
-    }
+  fetchUserData() {
+    getUserInfo()
+      .then((response) => {
+        this.setState({ user: response.data });
+      })
+      .catch((error) => {
+        console.error("Error fetching user data:", error);
+        this.setState({ user: null });
+      });
+  }
+
+  render() {
+    const { user } = this.state;
+    return (
+      <div>
+        <h1>Welcome to Filmbook!</h1>
+        {user && (
+          <div>
+            <h2>User Information</h2>
+            <p>Username: {user.username}</p>
+          </div>
+        )}
+        {!user && <p>Loading...</p>}
+      </div>
+    );
+  }
 }
+
+export default Home;
