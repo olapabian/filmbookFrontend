@@ -43,6 +43,12 @@ $font-size-md: 30px;
     width: 500px;
     height: 300px;
     border-radius: 10px;
+    p{
+        background-color: darkslateblue;
+        margin-bottom: 10px;
+        margin-top: 10px;
+        color: #b6b3bd;
+    }
 }
 .login-box{
     display: flex;

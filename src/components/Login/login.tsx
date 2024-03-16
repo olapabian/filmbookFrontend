@@ -1,134 +1,104 @@
 import React, { Component, FormEvent } from "react";
+import { useNavigate } from "react-router-dom";
 import "./login.scss";
 import filmbookLogo from "../../imgs/logos/download.png";
 import SignUp from "../SignUp/SignUp";
-import { request } from '../../Helpers/axios_helper'
+import { requestLogin, requestRegister, setAuthToken } from '../../Helpers/axios_helper';
 
 interface LoginState {
     showSignUp: boolean;
-    active: string;
     firstName: string;
     lastName: string;
     username: string;
     password: string;
 }
 
-interface LoginProps {
-    handleLogin: (username: string, password: string) => void; 
-    onLogin: (userData: { username: string, password: string }) => void; 
-    onRegister: (userData: { firstName: string, lastName: string, username: string, password: string }) => void; 
-}
+interface LoginProps {}
 
+const Login: React.FC<LoginProps> = () => {
+    const navigate = useNavigate();
+    const [state, setState] = React.useState<LoginState>({
+        showSignUp: false,
+        firstName: "",
+        lastName: "",
+        username: "",
+        password: "",
+    });
 
-class Login extends Component<LoginProps, LoginState> {
-    constructor(props: LoginProps) {
-        super(props);
-        this.state = {
-            showSignUp: false,
-            active: "login",
-            firstName: "",
-            lastName: "",
-            username: "",
-            password: "",
-        };
-        this.toggleSignUp = this.toggleSignUp.bind(this);
-    }
-
-    toggleSignUp() {
-        this.setState(prevState => ({
+    const toggleSignUp = () => {
+        setState(prevState => ({
+            ...prevState,
             showSignUp: !prevState.showSignUp
         }));
     }
 
-    onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = event.target;
-        this.setState(prevState => ({
-            ...prevState,
-            [name]: value
-        }));
-    }
-    
-    onSubmitLogin = (event: FormEvent<HTMLFormElement>) => {
-        event.preventDefault(); 
-        const { username, password } = this.state;
-        this.props.onLogin({ username, password });
-    }
-
-
-    onSubmitRegister = (event: FormEvent<HTMLFormElement>) => {
+    const handleLogin = (event: FormEvent<HTMLFormElement>): void => {
         event.preventDefault();
-        const { firstName, lastName, username, password } = this.state;
-        this.props.onRegister({ firstName, lastName, username, password });
+        const form = event.target as HTMLFormElement;
+        const usernameInput = form.elements.namedItem("username") as HTMLInputElement | null;
+        const passwordInput = form.elements.namedItem("password") as HTMLInputElement | null;
+        const username = usernameInput ? usernameInput.value : "";
+        const password = passwordInput ? passwordInput.value : "";
+
+        onLogin(username, password);  
     }
 
-
-    handleLogin = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
-        event.preventDefault(); 
-        const { username, password } = this.state; 
-        this.props.onLogin({ username, password });
-    }
-
-    onLogin = ({ username, password }: { username: string, password: string }) => {
-        request("POST",
-            "/login",
-            { login: username, password: password}
-            ).then((response) => {
-                console.log("udalo sie")
-            }).catch((error) => {
-                console.log("nie udalos sie")
+    const onLogin = (username: string, password: string): void => {
+        requestLogin("POST", "/login", { username, password })
+            .then((response) => {
+                setAuthToken(response.data.token);
+                console.log("Udało się zalogować");
+                navigate("/home"); // Redirect to home page
+            })
+            .catch((error) => {
+                if (error.response && error.response.data && error.response.data.message) {
+                    alert(error.response.data.message); // Display error message
+                } else {
+                    console.log("Nie udało się zalogować");
+                }
             });
     }
-    
 
-    
-
-    onRegister = (firstName: string, lastName: string, username: string, password: string) => {
-        request("POST",
-            "/register",
-            { 
-                firstName: firstName,
-                lastName: lastName,
-                login: username, 
-                password: password}
-            ).then((response) => {
-                console.log("udalo sie")
-            }).catch((error) => {
-                console.log("nie udalos sie")
-            });
-
+    const onRegister = (firstName: string, lastName: string, username: string, password: string, gender: string) => {
+        requestRegister("POST", "/register", { firstName, lastName, username, password, gender })
+        .then((response) => {
+            setAuthToken(response.data.token);
+            console.log("Udało się zarejestrować");
+            toggleSignUp();
+        })
+        .catch((error) => {
+            if (error.response && error.response.data && error.response.data.message) {
+                alert(error.response.data.message); // Display error message
+            } else {
+                console.log("Nie udało się zarejestrować");
+            }
+        });
     }
-    render() {
-        const { showSignUp } = this.state;
-        return (
-            <div className="login">
-                {showSignUp && <SignUp onClose={this.toggleSignUp} onRegister={this.onRegister} onSubmitRegister={this.onSubmitRegister} onChangeHandler={this.onChangeHandler} />} 
 
-                <div className="login-container">
-                    <div className="login-header">
-                        <img src={filmbookLogo} alt="filmbook logo" />
-                        <h2>RecenzujmyRazem - Portal Społecznościowy dla Miłośników Filmów</h2>
-                    </div>
-                    <div className="login-fields">
-                        <form className="login-box" onSubmit={this.onSubmitLogin}>
+    return (
+        <div className="login">
+            {state.showSignUp && <SignUp onClose={toggleSignUp} onRegister={onRegister}/> }
 
-                                <input name="username" type="text" placeholder="Login"onChange={this.onChangeHandler} />
-
-                                <input name="password" type="password" placeholder="Hasło" />
-
-                                <button type="submit" className="btn-login" onClick={this.handleLogin} >Zaloguj się</button>
-
-                            
-                            <p>Jeszcze nie masz konta?</p>
-                            <button className="btn-create-acc" onClick={this.toggleSignUp}>Zarejestruj się</button>
-                        </form>
-                    </div>
+            <div className="login-container">
+                <div className="login-header">
+                    <img src={filmbookLogo} alt="filmbook logo" />
+                    <h2>RecenzujmyRazem - Portal Społecznościowy dla Miłośników Filmów</h2>
                 </div>
-                <footer className="footer">
-                    <h3>Aleksandra Pabian</h3>
-                </footer>
+                <div className="login-fields" >
+                    <form className="login-box" onSubmit={handleLogin}>
+                        <input name="username" type="text" placeholder="Login"/>
+                        <input name="password" type="password" placeholder="Hasło"/>
+                        <button type="submit" className="btn-login">Zaloguj się</button>
+                    </form>
+                    <p>Jeszcze nie masz konta?</p>
+                    <button className="btn-create-acc" onClick={toggleSignUp}>Zarejestruj się</button>
+                </div>
             </div>
-        );
-    }
+            <footer className="footer">
+                <h3>Aleksandra Pabian</h3>
+            </footer>
+        </div>
+    );
 }
 
 export default Login;

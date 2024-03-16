@@ -1,5 +1,5 @@
 import React from "react";
-import { request } from "../../Helpers/axios_helper";
+import { requestLogin } from "../../Helpers/axios_helper";
 
 // interface HomeState {
 //     data: string[];
@@ -16,21 +16,21 @@ export default class Home extends React.Component<{}, HomeState> {
         };
     }
 
-    componentDidMount(): void {
-        request(
-            "GET",
-            "messages",
-            {}
-        ).then((response) => {
-            if (Array.isArray(response.data)) {
-                this.setState({ data: response.data });
-            } else {
-                console.error("Received data is not an array:", response.data);
-            }
-        }).catch(error => {
-            console.error("Error fetching data:", error);
-        });
-    }
+    // componentDidMount(): void {
+    //     requestLogin(
+    //         "GET",
+    //         "messages",
+    //         {}
+    //     ).then((response) => {
+    //         if (Array.isArray(response.data)) {
+    //             this.setState({ data: response.data });
+    //         } else {
+    //             console.error("Received data is not an array:", response.data);
+    //         }
+    //     }).catch(error => {
+    //         console.error("Error fetching data:", error);
+    //     });
+    // }
     
 
     render() {
