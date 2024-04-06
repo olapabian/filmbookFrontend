@@ -87,8 +87,8 @@ const Login: React.FC<LoginProps> = () => {
                 </div>
                 <div className="login-fields" >
                     <form className="login-box" onSubmit={handleLogin}>
-                        <input name="username" type="text" placeholder="Login"/>
-                        <input name="password" type="password" placeholder="Hasło"/>
+                        <input name="username" type="text" placeholder="Login" required/>
+                        <input name="password" type="password" placeholder="Hasło" required/>
                         <button type="submit" className="btn-login">Zaloguj się</button>
                     </form>
                     <p>Jeszcze nie masz konta?</p>
