@@ -6,7 +6,8 @@ import { BiCameraMovie } from "react-icons/bi";
 import { IoMdPerson, IoMdSettings } from "react-icons/io";
 import Home2 from "./Home2/home2";
 import MovieSearch from "./MovieSearch/movieSearch";
-
+import PeopleSearch from "./PeopleSearch/peopleSearch";
+import Settings from "./Settings/settings";
 interface State {
   user: { username: string } | null;
   activeTab: string;
@@ -104,8 +105,8 @@ class Home extends Component<{}, State> {
           </header>
           {activeTab === "home" && <Home2 />}{" "}
           {activeTab === "movies-search" && <MovieSearch />}{" "}
-          {/* {activeTab === "people-search" && <PeopleSearch />}{" "}
-          {activeTab === "settings" && <Settings />}{" "} */}
+          {activeTab === "people-search" && <PeopleSearch />}{" "}
+          {activeTab === "settings" && <Settings />}{" "}
         </div>
       </>
     );

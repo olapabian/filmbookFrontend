@@ -1,10 +1,10 @@
 import { Component } from "react";
-
+import "./movieSearch.scss";
 class MovieSearch extends Component<{}> {
   render() {
     return (
       <>
-        <p>dsisvnis</p>
+        <p>Movie search </p>
       </>
     );
   }
