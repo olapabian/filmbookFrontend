@@ -27,7 +27,7 @@ class PeopleSearch extends Component<{}, PeopleSearchState> {
   generateRandomResults = (): string[] => {
     const { searchQuery } = this.state;
     const results: string[] = [];
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 11; i++) {
       results.push(`${searchQuery}${i}`);
     }
     return results;

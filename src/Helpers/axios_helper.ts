@@ -1,6 +1,6 @@
 import axios from "axios";
 axios.defaults.baseURL = 'http://localhost:8080';
-axios.defaults.headers.post["Content-Type"] = 'application/json'; // Poprawka: 'application/json'
+axios.defaults.headers.post["Content-Type"] = 'application/json';
 
 
 
@@ -48,7 +48,7 @@ export const requestRegister = (method: string, url: string, data: RegisterData 
     });
 };
 
-export const getUserInfo = () => {
+export const getUsername = () => {
     const token = getAuthToken();
     return axios.get("/user", {
       headers: {
