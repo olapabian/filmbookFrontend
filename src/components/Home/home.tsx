@@ -8,14 +8,23 @@ import Home2 from "./Home2/home2";
 import MovieSearch from "./MovieSearch/movieSearch";
 import PeopleSearch from "./PeopleSearch/peopleSearch";
 import Settings from "./Settings/settings";
-import { useNavigate } from "react-router-dom";
-const Home = ({ showedPage }: { showedPage: string }) => {
+import { useLocation, useNavigate } from "react-router-dom";
+
+const Home = ({ isOtherPage }: { isOtherPage: boolean }) => {
   const [user, setUser] = useState<{ username: string } | null>(null);
-  const [activeTab, setActiveTab] = useState<string>(showedPage);
+  const [activeTab, setActiveTab] = useState<string>("home");
+  const location = useLocation();
   const navigate = useNavigate();
+
   useEffect(() => {
     fetchUserData();
   }, []);
+
+  useEffect(() => {
+    // Extract showedPage from location state or use "home" if not available
+    const showedPage = (location.state && location.state.showedPage) || "home";
+    setActiveTab(showedPage);
+  }, [location]);
 
   const fetchUserData = () => {
     getUsername()
@@ -28,17 +37,15 @@ const Home = ({ showedPage }: { showedPage: string }) => {
       });
   };
 
-  const handleTabChange = (tab: string) => {
-    if (showedPage === "userPage") {
-      navigate(`home`);
-    } else {
-      setActiveTab(tab);
-    }
-  };
   const handleMyUsernameClick = () => {
     if (user && user.username) {
-      navigate(`userPage/${user.username}`);
+      navigate(`userPage/${user.username}`, { replace: true });
     }
+  };
+
+  const handleTabChange = (tab: string) => {
+    setActiveTab(tab);
+    navigate(`/home`, { state: { showedPage: tab }, replace: true });
   };
 
   return (
@@ -51,7 +58,9 @@ const Home = ({ showedPage }: { showedPage: string }) => {
           </div>
           <nav>
             <div
-              className={`home ${activeTab === "home" ? "active" : ""}`}
+              className={`home ${
+                !isOtherPage && activeTab === "home" ? "active" : ""
+              }`}
               onClick={() => handleTabChange("home")}
             >
               <FaHome />
@@ -79,7 +88,7 @@ const Home = ({ showedPage }: { showedPage: string }) => {
               <IoMdSettings />
             </div>
           </nav>
-          {
+          {!isOtherPage && (
             <div className="my-profile">
               <div className="column">
                 <h4>Twój profil</h4>
@@ -90,9 +99,9 @@ const Home = ({ showedPage }: { showedPage: string }) => {
               </div>
               <img src="src\imgs\logos\czlek.jpg" alt="" />
             </div>
-          }
+          )}
         </header>
-        {activeTab === "home" && <Home2 />}
+        {activeTab === "home" && <Home2 isOtherPage={isOtherPage} />}
         {activeTab === "movies-search" && <MovieSearch />}
         {activeTab === "people-search" && <PeopleSearch />}
         {activeTab === "settings" && <Settings />}

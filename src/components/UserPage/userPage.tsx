@@ -1,5 +1,6 @@
+// UserPage.js
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { getUserInfo, UserInfo } from "../../Helpers/user_info_helper";
 import "./usePage.scss";
 import Home from "../Home/home";
@@ -7,6 +8,7 @@ import Home from "../Home/home";
 const UserPage: React.FC = () => {
   const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
   const { username } = useParams<{ username: string }>();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (username) {
@@ -31,7 +33,7 @@ const UserPage: React.FC = () => {
     <>
       {userInfo && (
         <>
-          <Home showedPage={"userPage"} />
+          <Home isOtherPage={true} />
           <p>Username: {userInfo.username}</p>
           <p>First name: {userInfo.firstName}</p>
           <p>Last name: {userInfo.lastName}</p>
