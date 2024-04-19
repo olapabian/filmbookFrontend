@@ -21,7 +21,6 @@ const Home = ({ isOtherPage }: { isOtherPage: boolean }) => {
   }, []);
 
   useEffect(() => {
-    // Extract showedPage from location state or use "home" if not available
     const showedPage = (location.state && location.state.showedPage) || "home";
     setActiveTab(showedPage);
   }, [location]);
@@ -39,7 +38,7 @@ const Home = ({ isOtherPage }: { isOtherPage: boolean }) => {
 
   const handleMyUsernameClick = () => {
     if (user && user.username) {
-      navigate(`userPage/${user.username}`, { replace: true });
+      navigate(`userPage/${user.username}`);
     }
   };
 

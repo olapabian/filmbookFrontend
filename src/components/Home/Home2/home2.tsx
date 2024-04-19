@@ -74,7 +74,7 @@ const Home2 = ({ isOtherPage }: { isOtherPage: boolean }) => {
         </div>
 
         <div className="right-side">
-          <h1>Znajomi</h1>
+          <h1>Obserwowani</h1>
           <div className="friends-separator"></div>
           <div className="friend-view">
             <img src="src\imgs\logos\czlek.jpg" alt="" />

@@ -2,11 +2,14 @@
 :root {
     height: 100%;
   }
-  
+  body {
+    height: 100%;
+  }
   .main-div {
     display: flex;
     flex-direction: column;
     height: 100%;
+    background-color: $light-blue;
   }
   
   header {
@@ -15,6 +18,7 @@
     background-color: $light-blue;
     display: flex;
     flex-direction: row;
+    z-index: 10;
   }
   .logo{
     display: flex;
@@ -27,6 +31,7 @@
     }
     h1{
       background-color: $light-blue;
+      color: $primary-clr;
       font-size: 65px;
       font-family: 'Times New Roman', Times, serif;
     }
@@ -92,6 +97,8 @@
   .column p {
     margin: 0; 
     background-color: $light-blue;
+    color: $primary-clr;
+    font-size: 20px;
     &:hover{
       color: rgb(155, 147, 208);
       text-decoration: underline;
@@ -99,7 +106,9 @@
   }
   .column h4{
     margin: 0; 
+    color: $primary-clr;
     background-color: $light-blue;
+    font-size: 25px;
   }
 
   

@@ -1,18 +1,33 @@
-// UserPage.js
 import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { getUserInfo, UserInfo } from "../../Helpers/user_info_helper";
-import "./usePage.scss";
+import { useParams } from "react-router-dom";
+import {
+  getUserInfo,
+  UserInfo,
+  insertUserImageById,
+  getUserImageById,
+  deleteUserImageById,
+  getUserImageByUsername,
+} from "../../Helpers/user_info_helper"; // Zaktualizowane importy funkcji dotyczących obrazków
+import "./userPage.scss";
 import Home from "../Home/home";
+import czlekImage from "../../imgs/logos/czlek.jpg";
+import UserFriends from "./UserFriends/userFriends";
+import UserReviews from "./UserReviews/userReviews";
+import { FaCamera } from "react-icons/fa";
+import AddPhoto from "./AddPhoto/addPhoto";
+import { IoMdCloseCircleOutline } from "react-icons/io";
 
 const UserPage: React.FC = () => {
   const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
+  const [selectedTab, setSelectedTab] = useState<string>("friends");
+  const [isAddPhotoComponentShowed, setIsAddPhotoComponentShowed] =
+    useState<boolean>(false);
+  const [userImage, setUserImage] = useState<string | null>(null);
   const { username } = useParams<{ username: string }>();
-  const navigate = useNavigate();
-
   useEffect(() => {
     if (username) {
       fetchUserInfo();
+      fetchUserImage();
     }
   }, [username]);
 
@@ -25,20 +40,134 @@ const UserPage: React.FC = () => {
         .catch((error) => {
           console.error("Error fetching user info: ", error);
         });
-      console.log(username);
+    }
+  };
+
+  const handleTabClick = (tab: string) => {
+    setSelectedTab(tab);
+  };
+
+  const handleCamerIconClick = () => {
+    setIsAddPhotoComponentShowed(true);
+  };
+
+  const handleCloseAddPhoto = () => {
+    setIsAddPhotoComponentShowed(false);
+  };
+
+  const fetchUserImage = () => {
+    if (username) {
+      getUserImageByUsername(username)
+        .then((response) => {
+          setUserImage(URL.createObjectURL(response.data));
+        })
+        .catch((error) => {
+          console.error("Error fetching user image: ", error);
+        });
+    } else {
+      console.log("username nie ma");
+    }
+  };
+
+  // Funkcja do przesyłania obrazka użytkownika
+  const handleAddUserImage = (image: Blob) => {
+    if (userInfo) {
+      insertUserImageById(userInfo.userId, image)
+        .then(() => {
+          fetchUserInfo();
+        })
+        .catch((error) => {
+          console.error("Error adding user image: ", error);
+        });
+    }
+  };
+  const handleDeleteIconClick = () => {
+    if (userInfo) {
+      deleteUserImageById(userInfo.userId)
+        .then(() => {
+          // Zaktualizuj dane użytkownika po przesłaniu obrazka
+          fetchUserInfo();
+        })
+        .catch((error) => {
+          console.error("Error deleting user image: ", error);
+        });
     }
   };
 
   return (
     <>
+      {isAddPhotoComponentShowed && (
+        <AddPhoto
+          onClose={handleCloseAddPhoto}
+          onAddImage={handleAddUserImage}
+        />
+      )}{" "}
+      {/* Dodaj prop onAddImage do komponentu AddPhoto */}
       {userInfo && (
         <>
           <Home isOtherPage={true} />
-          <p>Username: {userInfo.username}</p>
-          <p>First name: {userInfo.firstName}</p>
-          <p>Last name: {userInfo.lastName}</p>
-          <p>Gender: {userInfo.gender}</p>
-          <p>FriendsIds: {userInfo.friendsIds}</p>
+          <main>
+            <div className="left-user-page"></div>
+            <div className="main-div-user-page">
+              <div className="my-profile-header">
+                <div className="user-container">
+                  <div className="profile-picture-container">
+                    {userImage ? (
+                      <img src={userImage} alt="" />
+                    ) : (
+                      <img src={czlekImage} alt="" />
+                    )}
+                    <div className="icon-div" onClick={handleCamerIconClick}>
+                      <FaCamera className="camera-icon" />
+                    </div>
+                    <div
+                      className="delete-photo-icon-div"
+                      onClick={handleDeleteIconClick}
+                    >
+                      <IoMdCloseCircleOutline className="delete-icon" />
+                    </div>
+                  </div>
+                  <div className="basic-info">
+                    <h4>
+                      {userInfo.firstName} {userInfo.lastName}
+                    </h4>
+                    <p>{userInfo.username}</p>
+                  </div>
+                </div>
+                <div className="buttons">
+                  {/* jesli to moj profil */}
+                  <button>Edytuj profil</button>
+
+                  {/* jesli to kogos profil */}
+                  {/* jesli juz jest znajomym to napis "Twoj znajomy" 
+                    albo "oczekuje na akceptacje" 
+                    Może tez roziniecie w dol i usun ze znajomych*/}
+                  <button>Zaproś znajomego</button>
+                </div>
+              </div>
+              <div className="user-info">
+                <div className="user-info-nav">
+                  <button
+                    className={selectedTab === "friends" ? "active" : ""}
+                    onClick={() => handleTabClick("friends")}
+                  >
+                    Znajomi
+                  </button>
+                  <button
+                    className={selectedTab === "reviews" ? "active" : ""}
+                    onClick={() => handleTabClick("reviews")}
+                  >
+                    Recenzje użytkownika
+                  </button>
+                </div>
+                <div className="display-info">
+                  {selectedTab === "friends" && <UserFriends />}
+                  {selectedTab === "reviews" && <UserReviews />}
+                </div>
+              </div>
+            </div>
+            <div className="rigth-user-page"></div>
+          </main>
         </>
       )}
     </>
