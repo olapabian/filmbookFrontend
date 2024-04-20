@@ -7,10 +7,13 @@ import {
   getUserImageById,
   deleteUserImageById,
   getUserImageByUsername,
-} from "../../Helpers/user_info_helper"; // Zaktualizowane importy funkcji dotyczących obrazków
+} from "../../Helpers/user_info_helper";
 import "./userPage.scss";
 import Home from "../Home/home";
 import czlekImage from "../../imgs/logos/czlek.jpg";
+import manImage from "../../imgs/men.jpg";
+import womanImage from "../../imgs/women.jpg";
+import customImage from "../../imgs/neutral.jpg";
 import UserFriends from "./UserFriends/userFriends";
 import UserReviews from "./UserReviews/userReviews";
 import { FaCamera } from "react-icons/fa";
@@ -115,8 +118,18 @@ const UserPage: React.FC = () => {
                     {userImage ? (
                       <img src={userImage} alt="" />
                     ) : (
-                      <img src={czlekImage} alt="" />
+                      <img
+                        src={
+                          userInfo.gender === "Male"
+                            ? manImage
+                            : userInfo.gender === "Female"
+                            ? womanImage
+                            : customImage
+                        }
+                        alt=""
+                      />
                     )}
+
                     <div className="icon-div" onClick={handleCamerIconClick}>
                       <FaCamera className="camera-icon" />
                     </div>

@@ -1,10 +1,14 @@
 import React, { Component, ChangeEvent } from "react";
 import "./peopleSearch.scss";
 import Results from "./Results/results";
+import {
+  getLivePeopleSearchResults,
+  UserInfo,
+} from "../../../Helpers/search_helper"; // Dodaj import funkcji getLivePeopleSearchResults i interfejsu UserInfo
 
 interface PeopleSearchState {
   searchQuery: string;
-  results: string[];
+  results: UserInfo[]; // Zmieniłem typ results na UserInfo[]
 }
 
 class PeopleSearch extends Component<{}, PeopleSearchState> {
@@ -16,21 +20,12 @@ class PeopleSearch extends Component<{}, PeopleSearchState> {
     };
   }
 
-  handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+  handleInputChange = async (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
-    this.setState({ searchQuery: value }, () => {
-      const results = this.generateRandomResults();
+    this.setState({ searchQuery: value }, async () => {
+      const results = await getLivePeopleSearchResults(value);
       this.setState({ results });
     });
-  };
-
-  generateRandomResults = (): string[] => {
-    const { searchQuery } = this.state;
-    const results: string[] = [];
-    for (let i = 0; i < 11; i++) {
-      results.push(`${searchQuery}${i}`);
-    }
-    return results;
   };
 
   render() {

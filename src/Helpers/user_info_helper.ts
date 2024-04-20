@@ -1,5 +1,4 @@
 import axios, { AxiosResponse } from "axios";
-import { useState } from "react";
 
 axios.defaults.baseURL = 'http://localhost:8080';
 axios.defaults.headers.post["Content-Type"] = 'application/json';
@@ -11,6 +10,8 @@ export interface UserInfo {
   username: string;
   gender: string;
   friendsIds: string;
+  folllowingIds: string;
+  followersIds: string;
 }
 
 export const getAuthToken = (): string | null => {
