@@ -18,7 +18,6 @@
     background-color: $secondary-clr;;
     height: 100%;
     width: 10%;
-
   }
   
   .main-div-user-page {
@@ -101,14 +100,25 @@
     border-radius: 15px;
   }
   .basic-info{
-    margin-top: 50px;
+    margin-top: 30px;
+    // gap: 10px;
     h4{
+      display: flex;
+      flex-direction: row;
         color: $light-yellow;
         font-size: 35px;
     }
     p{
         color: $light-yellow;
         font-size: 25px;
+    }
+  }
+  .napis-obserwujesz{
+    margin-top: 14px;
+    margin-left: 10px;
+    p{
+      color: $pr-dark-gray;
+      font-size: 18px;
     }
   }
   .buttons{ 
@@ -133,7 +143,16 @@
             background-color: $pr-dark-gray;
         }
     }
+    .obserwujesz {
+      width: 200px;
+      height: 60px;
+      background-color: $primary-clr;
+      &:hover {
+        background-color: $pr-dark-gray;
+    }
+    }
   }
+
   .user-info{
     display: flex;
     flex-direction: column;
@@ -145,6 +164,7 @@
     display: flex;
     flex-direction: row;
     margin-top: 20px;
+    margin-bottom: 0px;
     gap: 5px;
     button {
         width: 50%;
@@ -160,11 +180,12 @@
         &:hover {
             background-color: $light-yellow;
         }
+
     }
     button.active {
       background-color: $light-yellow;
     }
-    
+
 }
 
 .display-info {
@@ -172,8 +193,8 @@
     width: 100%;
     background-color: $secondary-clr;
     display: flex;
-    justify-content: center; /* Wycentrowanie zawartości wzdłuż osi X */
-    align-items: center; /* Wycentrowanie zawartości wzdłuż osi Y */
+
+    margin-top: 20px;
 }
 
   .rigth-user-page {
@@ -181,4 +202,5 @@
     height: 100%;
     width: 10%;
   }
+
   

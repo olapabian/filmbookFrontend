@@ -1,8 +1,8 @@
 import React from "react";
-import "./userReviews.scss";
+import "./reviews.scss";
 import { AiTwotoneLike } from "react-icons/ai";
 import { FaCommentDots } from "react-icons/fa";
-const UserReviews = () => {
+const Reviews = () => {
   return (
     <div className="middle">
       <div className="review">
@@ -70,4 +70,4 @@ const UserReviews = () => {
   );
 };
 
-export default UserReviews;
+export default Reviews;

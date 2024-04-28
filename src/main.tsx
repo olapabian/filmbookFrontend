@@ -5,15 +5,29 @@ import "./scss/index.scss";
 import Login from "./components/Login/login.tsx";
 import Home from "./components/Home/home.tsx";
 import UserPage from "./components/UserPage/userPage.tsx";
+import ResultPage from "./components/Home/PeopleSearch/ResultPage/resultPage.tsx";
+import MovieResultPage from "./components/Home/MovieSearch/ResultsPageMovie/resultPageMovie";
+import MoviePage from "./components/MoviePage/moviePage.tsx";
 import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
-ReactDOM.createRoot(document.getElementById("root")!).render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/home" element={<Home isOtherPage={false} />} />
-        <Route path="/login" element={<Login />}></Route>
-        <Route path="/home/userPage/:username" element={<UserPage />}></Route>
-      </Routes>
-    </BrowserRouter>
-  </React.StrictMode>
-);
+
+const AppRouter = () => {
+  return (
+    <React.StrictMode>
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path="/home"
+            element={<Home isOtherPage={false} isMyPage={false} />}
+          />
+          <Route path="/login" element={<Login />} />
+          <Route path="/userPage/:username" element={<UserPage />} />
+          <Route path="/moviePage/:movieId" element={<MoviePage />} />
+          <Route path="/peopleResult" element={<ResultPage />} />
+          <Route path="/movieResult" element={<MovieResultPage />} />
+        </Routes>
+      </BrowserRouter>
+    </React.StrictMode>
+  );
+};
+
+ReactDOM.createRoot(document.getElementById("root")!).render(<AppRouter />);

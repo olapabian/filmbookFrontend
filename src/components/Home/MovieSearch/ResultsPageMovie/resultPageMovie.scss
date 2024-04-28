@@ -1,40 +1,34 @@
-@import "../../../../scss/colors.scss"; 
-.search-inside-separator{
-  margin-top: -25px;
-    margin-bottom: 10px;
-    height: 0.7px;
-    width: 95%;
-    background-color: gray;
-}
-.results-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: $light-blue;
+@import "../../../../scss/colors.scss";
+main{
     width: 100%;
-    padding: 20px;
-    border-radius: 30px;
-  }
-  
-  .result-item {
+}
+.main-div-user-page-resultPage{
+    margin-top: 50px;
+    background-color: $secondary-clr;
+    height: 100%;
+    width: 80%;
+}
+.result-item-resultPage{
     padding: 3px;
-    margin-top: 5px;
+    height: 200px;
+    margin-top: 15px;
     background-color:$light-blue;
-    border-radius: 5px;
+    border-radius: 50px;
     width: 100%;
     text-align: center;
+
     &:hover{
       background-color:$darker-blue;
-      .result-content{
+      .result-content-movie-result-page{
         background-color:$darker-blue;
       }
-      .text-fields{
+      .text-fields-resultPage{
         background-color:$darker-blue;
       }
-      .firstName-lastName{
+      .movie-title{
         background-color:$darker-blue;
       }
-      .username-results{
+      .username-results-resultPage{
         background-color:$darker-blue;
       }
       img{
@@ -43,47 +37,53 @@
       p{
         background-color:$darker-blue;
       }
+      .movie-release-year{
+        background-color:$darker-blue;
+      }
+
     }
-  }
-  .result-content{
+}
+.result-content-movie-result-page{
     display: flex;
     flex-direction: row;
     background-color:$light-blue;
+    border-radius: 50px;
+    margin: 20px;
     img{
       background-color:$light-blue;
-      height: 46px;
-      width: 46px;
-      border-radius: 23px;
+      height: 142px;
+      width: 100px;
     }
-  }
-  .text-fields{
+}
+.text-fields-resultPage{
     margin-left: 20px;
     display: flex;
     flex-direction: column; 
     width: 100%;
     background-color:$light-blue;
-  }
-  .firstName-lastName{
+}
+.movie-title{
     width: 100%;
     background-color:$light-blue;
     display: flex;
     flex-direction: row; 
     gap: 8px;
     p{
-      font-size: large;
+      font-size: 30px;
       color: $pr-dark-gray;
       background-color:$light-blue;
     }
-  }
-  .username-results{
+}
+
+.movie-release-year{
     width: 100%;
     background-color:$light-blue;
     display: flex;
     flex-direction: row; 
+    gap: 8px;
     p{
-      font-size: medium;
-      color: $pr-gray;
+      font-size: 25px;
+      color: $pr-dark-gray;
       background-color:$light-blue;
     }
-  }
- 
+}

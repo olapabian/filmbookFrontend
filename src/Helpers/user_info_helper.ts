@@ -10,8 +10,10 @@ export interface UserInfo {
   username: string;
   gender: string;
   friendsIds: string;
-  folllowingIds: string;
+  followingIds: string;
   followersIds: string;
+  followersCount: number;
+  followingCount: number;
 }
 
 export const getAuthToken = (): string | null => {
@@ -20,14 +22,22 @@ export const getAuthToken = (): string | null => {
 
 export const getUserInfo = (username: string | undefined): Promise<AxiosResponse<UserInfo>> => {
     const token = getAuthToken();
-    return axios.get(`/userInfo/${username}`, {
+    return axios.get(`/userInfoByUsername/${username}`, {
         headers: {
             Authorization: `Bearer ${token}` 
         }
     }); 
 };
 
-// Pobierz obrazek użytkownika po nazwie użytkownika
+export const getUserInfoById = (id: number | undefined): Promise<AxiosResponse<UserInfo>> => {
+    const token = getAuthToken();
+    return axios.get(`/userInfoById/${id}`, {
+        headers: {
+            Authorization: `Bearer ${token}` 
+        }
+    }); 
+};
+
 export const getUserImageByUsername = (username: string): Promise<AxiosResponse<Blob>> => {
     const token = getAuthToken();
     return axios.get(`/userImageByUsername/${username}`, {
@@ -77,7 +87,7 @@ export const insertUserImageById = (userId: number, image: Blob): Promise<void> 
         };
     });
 };
-export const deleteUserImageById = (userId: number): Promise<void> => {
+export const deleteUserImageById = (userId: number): Promise<string> => {
     const token = getAuthToken();
     console.log(token);
     console.log(userId);
@@ -85,5 +95,13 @@ export const deleteUserImageById = (userId: number): Promise<void> => {
         headers: {
             Authorization: `Bearer ${token}` 
         }
+    })
+    .then(response => {
+        return response.data; // Zwracamy wiadomość potwierdzającą
+    })
+    .catch(error => {
+        console.error("Błąd podczas usuwania zdjęcia użytkownika: ", error);
+        throw error; // Rzucamy błąd, aby móc go obsłużyć gdzie indziej
     });
 };
+

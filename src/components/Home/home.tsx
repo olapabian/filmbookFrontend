@@ -9,21 +9,37 @@ import MovieSearch from "./MovieSearch/movieSearch";
 import PeopleSearch from "./PeopleSearch/peopleSearch";
 import Settings from "./Settings/settings";
 import { useLocation, useNavigate } from "react-router-dom";
-
-const Home = ({ isOtherPage }: { isOtherPage: boolean }) => {
-  const [user, setUser] = useState<{ username: string } | null>(null);
+import {
+  getUserImageByUsername,
+  UserInfo,
+} from "../../Helpers/user_info_helper";
+import manImage from "../../imgs/men.jpg";
+import womanImage from "../../imgs/women.jpg";
+import customImage from "../../imgs/neutral.jpg";
+const Home = ({
+  isOtherPage,
+  isMyPage,
+}: {
+  isOtherPage: boolean;
+  isMyPage: boolean;
+}) => {
+  const [user, setUser] = useState<UserInfo | null>(null);
   const [activeTab, setActiveTab] = useState<string>("home");
   const location = useLocation();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    fetchUserData();
-  }, []);
+  const [userImage, setUserImage] = useState<string | null>(null);
 
   useEffect(() => {
     const showedPage = (location.state && location.state.showedPage) || "home";
     setActiveTab(showedPage);
+    fetchUserData();
   }, [location]);
+
+  useEffect(() => {
+    if (user !== null) {
+      fetchUserImage();
+    }
+  }, [user]);
 
   const fetchUserData = () => {
     getUsername()
@@ -36,9 +52,23 @@ const Home = ({ isOtherPage }: { isOtherPage: boolean }) => {
       });
   };
 
+  const fetchUserImage = () => {
+    if (user !== null) {
+      getUserImageByUsername(user.username)
+        .then((response) => {
+          setUserImage(URL.createObjectURL(response.data));
+        })
+        .catch((error) => {
+          console.error("Error fetching user image: ", error);
+        });
+    } else {
+      console.log("user jest nullem");
+    }
+  };
+
   const handleMyUsernameClick = () => {
     if (user && user.username) {
-      navigate(`userPage/${user.username}`);
+      navigate(`../userPage/${user.username}`);
     }
   };
 
@@ -87,7 +117,7 @@ const Home = ({ isOtherPage }: { isOtherPage: boolean }) => {
               <IoMdSettings />
             </div>
           </nav>
-          {!isOtherPage && (
+          {!isMyPage && (
             <div className="my-profile">
               <div className="column">
                 <h4>Twój profil</h4>
@@ -96,7 +126,20 @@ const Home = ({ isOtherPage }: { isOtherPage: boolean }) => {
                   <p onClick={handleMyUsernameClick}>Loading username...</p>
                 )}
               </div>
-              <img src="src\imgs\logos\czlek.jpg" alt="" />
+              {userImage ? (
+                <img src={userImage} alt="" />
+              ) : (
+                <img
+                  src={
+                    user?.gender === "Male"
+                      ? manImage
+                      : user?.gender === "Female"
+                      ? womanImage
+                      : customImage
+                  }
+                  alt=""
+                />
+              )}
             </div>
           )}
         </header>

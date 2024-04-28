@@ -25,13 +25,13 @@
     text-align: center;
     &:hover{
       background-color:$darker-blue;
-      .result-content{
+      .result-content-results-movie{
         background-color:$darker-blue;
       }
       .text-fields{
         background-color:$darker-blue;
       }
-      .firstName-lastName{
+      .title{
         background-color:$darker-blue;
       }
       .username-results{
@@ -45,36 +45,41 @@
       }
     }
   }
-  .result-content{
+  .result-content-results-movie{
     display: flex;
     flex-direction: row;
     background-color:$light-blue;
     img{
       background-color:$light-blue;
-      height: 46px;
-      width: 46px;
-      border-radius: 23px;
+      height: 57px;
+      width: 40px;
     }
   }
-  .text-fields{
+  .text-fields {
     margin-left: 20px;
     display: flex;
     flex-direction: column; 
     width: 100%;
-    background-color:$light-blue;
+    background-color: $light-blue;
   }
-  .firstName-lastName{
+  
+  .title {
+    align-items: center;
     width: 100%;
-    background-color:$light-blue;
+    background-color: $light-blue;
     display: flex;
     flex-direction: row; 
     gap: 8px;
-    p{
-      font-size: large;
-      color: $pr-dark-gray;
-      background-color:$light-blue;
-    }
+    margin-top: 15px;
+     p {
+    font-size: 20px;
+    color: $pr-dark-gray;
+    background-color: $light-blue;
   }
+  }
+  
+ 
+  
   .username-results{
     width: 100%;
     background-color:$light-blue;
