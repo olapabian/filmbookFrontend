@@ -127,7 +127,7 @@ const Home = ({
                 )}
               </div>
               {userImage ? (
-                <img src={userImage} alt="" />
+                <img src={userImage} alt="" onClick={handleMyUsernameClick} />
               ) : (
                 <img
                   src={
@@ -138,6 +138,7 @@ const Home = ({
                       : customImage
                   }
                   alt=""
+                  onClick={handleMyUsernameClick}
                 />
               )}
             </div>

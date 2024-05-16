@@ -55,3 +55,19 @@ export const getMoviePhotosByPhotoId = async (photoId: string): Promise<ArrayBuf
         }
     }); 
 }
+
+export const getMovieAverageRating = async (movieId: string) => {
+    try {
+        const authToken = getAuthToken(); 
+        const response = await axios.get(`/getMovieAverageRating/${movieId}`, {
+            headers: {
+                Authorization: `Bearer ${authToken}` 
+            }
+        });
+        return response.data; 
+    } catch (error) {
+        console.error("Błąd podczas pobierania średniej oceny filmu:", error);
+        throw error;
+    }
+};
+

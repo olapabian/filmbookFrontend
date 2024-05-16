@@ -57,7 +57,6 @@ const MovieSearch = () => {
           onKeyPress={handleKeyPress}
         />
         {isSearching && <ResultMovies results={results} />}{" "}
-        {/* Assuming Results component exists */}
       </div>
     </div>
   );

@@ -189,12 +189,10 @@
 }
 
 .display-info {
-    height: 100%;
-    width: 100%;
     background-color: $secondary-clr;
     display: flex;
 
-    margin-top: 20px;
+    justify-content: center;
 }
 
   .rigth-user-page {

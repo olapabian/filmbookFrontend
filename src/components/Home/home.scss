@@ -1,15 +1,17 @@
 @import "../../scss/colors.scss";
 :root {
     height: 100%;
+    background-color: $secondary-clr;
   }
   body {
     height: 100%;
+    background-color: $secondary-clr;
   }
   .main-div {
     display: flex;
     flex-direction: column;
     height: 100%;
-    background-color: $light-blue;
+    background-color: $secondary-clr;
   }
   
   header {

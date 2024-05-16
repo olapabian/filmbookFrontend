@@ -1,79 +1,38 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./home2.scss";
-import { AiTwotoneLike } from "react-icons/ai";
-import { FaCommentDots } from "react-icons/fa";
 
+import { getUsername } from "../../../Helpers/axios_helper";
+import { UserInfo } from "../../../Helpers/user_info_helper";
+import Reviews from "../../Reviews/reviews";
 const Home2 = ({ isOtherPage }: { isOtherPage: boolean }) => {
+  const [user, setUser] = useState<UserInfo | null>(null);
+  useEffect(() => {
+    fetchLoggedUser();
+  }, []);
+  const fetchLoggedUser = () => {
+    getUsername()
+      .then((response) => {
+        setUser(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching user data:", error);
+      });
+  };
   return (
     !isOtherPage && (
       <main>
-        <div className="left-side"></div>
-
-        <div className="middle">
-          <div className="review">
-            <div className="review-head">
-              <div className="profile-picture">
-                <img src="src\imgs\logos\czlek.jpg" alt="" />
-              </div>
-              <div className="info">
-                <div className="username">
-                  <p>Basia</p>
-                </div>
-                <div className="time-ago">
-                  <p>50 min temu</p>
-                </div>
-              </div>
-              <div className="head-separator"></div>
-
-              <div className="go-to-review-btn">
-                <button>Do recenzji</button>
-              </div>
-            </div>
-
-            <div className="up-to-head-main-separator">
-              <div className="head-main-separator"></div>
-            </div>
-
-            <div className="review-main">
-              <div className="movie">
-                <p className="title">Tytuł</p>
-                <div className="poster">
-                  <img src="src\imgs\logos\poster.jpg" alt="" />
-                </div>
-              </div>
-              <div className="review-content">
-                <h2 className="review-title">Bardzo fajny film kochani</h2>
-                <p className="review-text">
-                  orem Ipsum is simply dummy text of the printing and
-                  typesetting industry. Lorem Ipsum has been the industry's
-                  standard dummy text ever since the 1500s, when an unknown
-                  printer took a galley of type and scrambled it to make a type
-                  specimen book. It has survived not only five centuries, but
-                  also the leap into electronic typesetting, remaining
-                  essentially unchanged. It was popularised in the 1960s with
-                  the release of Letraset sheets containing Lorem
-                </p>
-              </div>
-            </div>
-
-            <div className="review-reactions">
-              <div className="likes-count">
-                <AiTwotoneLike />
-                <p>4</p>
-              </div>
-              <div className="comment-count">
-                <FaCommentDots />
-                <p>2</p>
-              </div>
-            </div>
-
-            <div className="up-to-head-main-separator">
-              <div className="react-separator"></div>
-            </div>
-          </div>
+        {/* <div className="left-side"></div> */}
+        <div className="middle-home2">
+          <Reviews
+            reviewType={"followingReviews"}
+            showMovie={true}
+            userId={user?.userId}
+            movieId={undefined}
+            showUsers={true}
+          />
         </div>
 
-        <div className="right-side">
+        {/* <div className="right-side">
           <h1>Obserwowani</h1>
           <div className="friends-separator"></div>
           <div className="friend-view">
@@ -82,7 +41,7 @@ const Home2 = ({ isOtherPage }: { isOtherPage: boolean }) => {
               <p>Krzysiu</p>
             </div>
           </div>
-        </div>
+        </div> */}
       </main>
     )
   );

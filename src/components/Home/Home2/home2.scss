@@ -4,216 +4,24 @@ main {
     height: 90%;
     display: flex;
     flex-direction: row;
-    position: absolute;
+    justify-content: center;
+    background-color: $secondary-clr;
     bottom: 0;
   }
   
   .left-side {
-    width: 18%;
+    width: 15%;
     height: 100%;
     background-color: $secondary-clr;
   }
-  
-  .middle {
-    width: 64%;
-    height: 100%;
+  .middle-home2{
+    width: 80%;
     display: flex;
-    justify-content: center; 
-    align-items: center; 
+    justify-content: center;
     background-color: $secondary-clr;
-  }
-  .review{
-    width: 90%;
-    height: 550px;
-    background-color: $light-yellow;
-    border-radius: 30px;
-    display: flex;
-    flex-direction: column; 
-
-  }
-  .review-head{
-    width: 95%;
-    height: 7%;
-    background-color: $light-yellow;
-    margin: 20px;
-    display: flex;
-    flex-direction: row;
-    margin-bottom: 30px;
-  }
-  .profile-picture{
-    justify-content: center; 
-    align-items: center; 
-    background-color: $light-yellow;
-    margin-right: 10px;
-    img{
-      height: 60px;
-      width: 60px;
-      border-radius: 50%;
-    }
-  }
-  .info{
-    display: flex;
-    flex-direction: column;
-    background-color: $light-yellow;
-  }
-  .username{
-    p{
-      color: darkslateblue;
-      font-size: 20px;
-      background-color: $light-yellow;
-    }
-    &:hover{
-      p{
-        color: rgb(152, 152, 235);
-        text-decoration: underline;
-      }
-    }
-  }
-  .time-ago{
-    p{
-      font-size: 13px;
-      color: rgb(113, 102, 102);
-      background-color: $light-yellow;
-    }
-  }
-  .head-separator{
-    margin-left: 80px;
-    width: 50%;
-    height: 100%;
-    background-color: $light-yellow;
-  }
-  .go-to-review-btn{
-    background-color: $light-yellow;
-    button{
-      margin-left: 300px;
-      width: 100px;
-      height: 30px;
-      border-radius: 7px;
-      color: rgb(67, 117, 14);
-      font-size: 15px;
-      background-color: $secondary-clr;
-      border: 0px;
-    }
-    &:hover{
-      button{
-       background-color: rgb(152, 152, 235);
-       color: $secondary-clr;
-       text-decoration: underline;
-      }
-    }
-  }
-  .up-to-head-main-separator {
-    background-color: $light-yellow;
-    display: flex;
-    justify-content: center;
-  }
-  
-  .head-main-separator {
-    margin-bottom: 15px;
-    width: 97%;
-    height: 1px;
-    background-color: grey;
-  }
-  
-  .review-main{
-    width: 100%;
-    height: 65%;
-    background-color: $light-yellow;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-  }
-  .movie{
-    width: 22%;
-    color: darkslateblue;
-    margin-left: 20px;
-    display: flex;
-    flex-direction: column;
-    background-color: $light-yellow;
-    p{
-      margin-bottom: 6px;
-      margin-left: 7px;
-      font-size: 20px;
-      background-color: $light-yellow;
-    }
-    &:hover{
-      p{
-       color: rgb(155, 147, 208);
-       text-decoration: underline;
-      }
-    }
-  }
-  .poster{
-    background-color: $light-yellow;
-    img{
-      width: 200px;
-      border-radius: 5px; // Zaokrągla rogi ramki
-    }
-  }
-  .review-content{
-    width: 78%;
-    display: flex;
-    flex-direction: column;
-    margin-right: 20px;
-    margin-left: 30px;
-    background-color: $light-yellow;
-    h2{
-      color: darkslateblue;
-      font-size: 30px;
-      background-color: $light-yellow;
-    }
-    p{
-      color: $secondary-clr;
-      background-color: $light-yellow;
-    }
-  }
-  .review-reactions{
-    width: 100%;
-    height: 7%;
-    background-color:$light-yellow;
-    display: flex;
-    flex-direction: row;
-    gap: 150px;
-  }
-  .likes-count{
-    display: flex;
-    flex-direction: row;
-    margin-left: 30px;
-    background-color: $light-yellow;
-    p{
-      background-color: $light-yellow;
-      display: flex;
-      flex-direction: row;
-      margin-top: -2px;
-      margin-left: 1px;
-    }
-    svg {
-      background-color: $light-yellow;
-    }
-  }
-
-  .comment-count{
-    background-color: $light-yellow;
-    display: flex;
-    flex-direction: row;
-    // margin-left: 0px;
-    p{
-      background-color: $light-yellow;
-      margin-top: -3px;
-      margin-left: 2px;
-    }
-    svg {
-      background-color:$light-yellow;
-    }
-  }
-  .react-separator{
-    margin-bottom: 10px;
-    width: 97%;
-    height: 1px;
-    background-color: grey;
   }
   .right-side {
-    width: 18%;
+    width: 15%;
     height: 100%;
     background-color: $secondary-clr;
     align-items: center;

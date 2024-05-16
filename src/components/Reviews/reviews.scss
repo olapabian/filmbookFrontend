@@ -1,21 +1,23 @@
 @import "../../scss/colors.scss";
 .middle {
-    margin-top: 20px;
-    width: 70%;
-    height: 100%;
-    display: flex;
-    justify-content: center; 
-    align-items: center; 
-    background-color: $secondary-clr;
-  }
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  align-items: center; 
+  background-color: $secondary-clr;
+  margin-top: 4000;
+}
+
   .review{
     width: 100%;
-    height: 550px;
+    height: 500px;
     background-color: $light-yellow;
     border-radius: 30px;
     display: flex;
     flex-direction: column; 
-
+    margin-top: 25px;
+    margin-bottom: 25px;
   }
   .review-head{
     width: 95%;
@@ -31,6 +33,7 @@
     align-items: center; 
     background-color: $light-yellow;
     margin-right: 10px;
+    margin-top: -4px;
     img{
       height: 60px;
       width: 60px;
@@ -44,6 +47,7 @@
   }
   .username{
     p{
+      width: auto;
       color: darkslateblue;
       font-size: 20px;
       background-color: $light-yellow;
@@ -62,14 +66,14 @@
       background-color: $light-yellow;
     }
   }
-  .head-separator{
-    margin-left: 80px;
-    width: 50%;
-    height: 100%;
+
+  .stars{
+    margin-left: 40px;
     background-color: $light-yellow;
   }
   .go-to-review-btn{
     background-color: $light-yellow;
+    margin-left: auto;
     button{
       width: 100px;
       height: 30px;
@@ -115,6 +119,7 @@
     display: flex;
     flex-direction: column;
     background-color: $light-yellow;
+    margin-top: -15px;
     p{
       margin-bottom: 6px;
       margin-left: 7px;
@@ -130,24 +135,16 @@
   }
   .poster{
     background-color: $light-yellow;
-    img{
-      width: 200px;
-      border-radius: 5px; // Zaokrągla rogi ramki
-    }
   }
   .review-content{
     width: 78%;
     display: flex;
     flex-direction: column;
-    margin-right: 20px;
-    margin-left: 30px;
     background-color: $light-yellow;
-    h2{
-      color: darkslateblue;
-      font-size: 30px;
-      background-color: $light-yellow;
-    }
+    margin-right: 25px;
+    margin-left: 25px;
     p{
+      margin-top: 3px;
       color: $secondary-clr;
       background-color: $light-yellow;
     }
@@ -158,35 +155,42 @@
     background-color:$light-yellow;
     display: flex;
     flex-direction: row;
-    gap: 830px;
+    margin-top: 20px;
+    border-radius: 30px;
   }
   .likes-count{
+    margin: auto;
     display: flex;
     flex-direction: row;
     margin-left: 30px;
     background-color: $light-yellow;
+    gap:6px;
     p{
+      font-size: 15px;
       background-color: $light-yellow;
       display: flex;
       flex-direction: row;
-      margin-top: -2px;
-      margin-left: 1px;
+      margin-top: 3px;
     }
     svg {
       background-color: $light-yellow;
+      font-size: 20px; /* zmiana rozmiaru ikony */
     }
   }
 
   .comment-count{
+    margin-right: 30px;
     background-color: $light-yellow;
     display: flex;
     flex-direction: row;
+    gap:6px;
     p{
+      font-size: 15px;
       background-color: $light-yellow;
-      margin-top: -3px;
-      margin-left: 2px;
+      margin-top: 3px;
     }
     svg {
       background-color:$light-yellow;
+      font-size: 20px; /* zmiana rozmiaru ikony */
     }
   }

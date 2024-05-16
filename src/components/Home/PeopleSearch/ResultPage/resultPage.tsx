@@ -112,7 +112,12 @@ const ResultPage: FC<ResultsProps> = () => {
                   </div>
                   <div className="znajomy">
                     <p>
-                      {followed(result) ? "Obserwujesz" : "Nie obserwujesz"}
+                      {user &&
+                        (result.userId === user.userId
+                          ? "Ty"
+                          : followed(result)
+                          ? "Obserwujesz"
+                          : "Nie obserwujesz")}
                     </p>
                   </div>
                 </div>

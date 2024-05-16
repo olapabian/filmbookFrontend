@@ -1,7 +1,11 @@
-p{
-    font-size: 40px;
+@import "../../../scss/colors.scss";
+*{
+    background-color: $secondary-clr;
 }
-img{
-    height: auto;
-    width: auto;
+.movie-photos-container{
+    margin-top: 50px;
+    background-color: $secondary-clr;
+}
+.PhotoAlbum {
+    background-color: $secondary-clr;
 }

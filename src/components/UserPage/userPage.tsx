@@ -32,7 +32,7 @@ const UserPage: React.FC = () => {
       fetchLoggedUser();
       fetchUserInfo();
       fetchUserImage();
-      setSelectedTab("reviews");
+      setSelectedTab("followers");
     }
   }, [username]);
 
@@ -292,7 +292,15 @@ const UserPage: React.FC = () => {
                   {selectedTab === "followers" && (
                     <UserFollowing following={userInfo.followersIds} />
                   )}
-                  {selectedTab === "reviews" && <Reviews />}
+                  {selectedTab === "reviews" && (
+                    <Reviews
+                      reviewType={"userReviews"}
+                      showMovie={true}
+                      userId={userInfo.userId}
+                      movieId={undefined}
+                      showUsers={false}
+                    />
+                  )}
                   {selectedTab === "following" && (
                     <UserFollowing following={userInfo.followingIds} />
                   )}

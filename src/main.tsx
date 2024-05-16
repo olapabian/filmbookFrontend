@@ -8,6 +8,7 @@ import UserPage from "./components/UserPage/userPage.tsx";
 import ResultPage from "./components/Home/PeopleSearch/ResultPage/resultPage.tsx";
 import MovieResultPage from "./components/Home/MovieSearch/ResultsPageMovie/resultPageMovie";
 import MoviePage from "./components/MoviePage/moviePage.tsx";
+import ReviewPage from "./components/ReviewPage/reviewPage.tsx";
 import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 
 const AppRouter = () => {
@@ -24,6 +25,7 @@ const AppRouter = () => {
           <Route path="/moviePage/:movieId" element={<MoviePage />} />
           <Route path="/peopleResult" element={<ResultPage />} />
           <Route path="/movieResult" element={<MovieResultPage />} />
+          <Route path="/review/:reviewId" element={<ReviewPage />} />
         </Routes>
       </BrowserRouter>
     </React.StrictMode>

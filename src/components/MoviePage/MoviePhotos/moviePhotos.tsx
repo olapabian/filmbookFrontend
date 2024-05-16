@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import PhotoAlbum from "react-photo-album";
+
 import "./moviePhotos.scss";
 import {
   getMoviePhotosIdsByMovieId,
   getMoviePhotosByPhotoId,
   MoviePosterResponse,
-} from "../../../Helpers/movie_helper"; // Zastąp "axiosFile" odpowiednią nazwą pliku
+} from "../../../Helpers/movie_helper";
 
 const MoviePhotos: React.FC = () => {
   const { movieId } = useParams<{ movieId?: string }>();
@@ -48,19 +50,15 @@ const MoviePhotos: React.FC = () => {
       console.error("Error fetching photos:", error);
     }
   };
+  const photosAlbum = photos.map((photo, index) => ({
+    src: photo,
+    width: 800,
+    height: 600,
+  }));
 
   return (
     <div className="movie-photos-container">
-      <div className="photos-grid">
-        {photos.map((photo, index) => (
-          <img
-            key={index}
-            src={photo}
-            className="photo"
-            alt={`Photo ${index}`}
-          />
-        ))}
-      </div>
+      <PhotoAlbum layout="rows" photos={photosAlbum} />;
     </div>
   );
 };

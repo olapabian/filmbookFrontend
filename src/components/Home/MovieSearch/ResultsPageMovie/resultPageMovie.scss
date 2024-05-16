@@ -2,6 +2,7 @@
 main{
     width: 100%;
 }
+
 .main-div-user-page-resultPage{
     margin-top: 50px;
     background-color: $secondary-clr;
@@ -25,7 +26,7 @@ main{
       .text-fields-resultPage{
         background-color:$darker-blue;
       }
-      .movie-title{
+      .movie-title-movie-result{
         background-color:$darker-blue;
       }
       .username-results-resultPage{
@@ -62,18 +63,19 @@ main{
     width: 100%;
     background-color:$light-blue;
 }
-.movie-title{
-    width: 100%;
-    background-color:$light-blue;
-    display: flex;
-    flex-direction: row; 
-    gap: 8px;
-    p{
-      font-size: 30px;
-      color: $pr-dark-gray;
-      background-color:$light-blue;
-    }
+.movie-title-movie-result {
+  width: 100%;
+  display: flex;
+  flex-direction: row; 
+  background-color:$light-blue; /* Zmiana koloru tła na czerwony */
+  gap: 8px;
+  p {
+    font-size: 30px;
+    color: $pr-dark-gray;
+    background-color: $light-blue;
+  }
 }
+
 
 .movie-release-year{
     width: 100%;

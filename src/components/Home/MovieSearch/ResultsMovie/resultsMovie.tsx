@@ -2,6 +2,7 @@ import React, { FC, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { MovieInfoDto } from "../../../../Helpers/search_helper";
 import { getMoviePosterById } from "../../../../Helpers/movie_helper";
+import posterImage from "./../../../../imgs/plakat.jpg";
 import "./resultsMovie.scss";
 interface ResultMoviesProps {
   results: MovieInfoDto[];
@@ -51,7 +52,7 @@ const ResultMovies: FC<ResultMoviesProps> = ({ results }) => {
           onClick={() => goToMoviePage(result)}
         >
           <div className="result-content-results-movie">
-            <img src={getMoviePoster(result.movieId) || ""} alt="" />
+            <img src={getMoviePoster(result.movieId) || posterImage} alt="" />
             <div className="text-fields">
               <div className="title">
                 <p>{result.title}</p>

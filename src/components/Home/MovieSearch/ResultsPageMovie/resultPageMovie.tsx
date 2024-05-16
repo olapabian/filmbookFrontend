@@ -60,7 +60,7 @@ const ResultPageMovie: FC<ResultPageMovieProps> = () => {
               <div className="result-content-movie-result-page">
                 <img src={getMoviePoster(result.movieId) || ""} alt="" />
                 <div className="text-fields-resultPage">
-                  <div className="movie-title">
+                  <div className="movie-title-movie-result">
                     <p>{result.title}</p>
                   </div>
                   <div className="movie-release-year">

@@ -6,18 +6,22 @@
     align-items: center; 
     height: 100%;
     text-align: center;
+    background-color: $secondary-clr;
   }
   
   .header-people-search {
     width: 100%;
-    margin-top: 80px;
+    margin-top: 80px;    
+    background-color: $secondary-clr;
     h1 {
         margin: 0; 
         color: $light-yellow;
-        font-size: 50px
+        font-size: 50px;
+        background-color:$secondary-clr;
     }
   }
   .search-separator{
+    background-color: $secondary-clr;
     height: 40px;
   }
   .search-field {
