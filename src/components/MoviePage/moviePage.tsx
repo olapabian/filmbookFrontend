@@ -15,6 +15,8 @@ import AddReview from "./AddReview/addReview";
 import { isUserReviewedThisMovie } from "../../Helpers/review_helper";
 import { UserInfo } from "../../Helpers/user_info_helper";
 import { getUsername } from "../../Helpers/axios_helper";
+import posterImage from "./../../imgs/plakat.jpg";
+
 const MoviePage: React.FC = () => {
   const [user, setUser] = useState<UserInfo | null>(null);
   const [ratingAvg, setRatingAvg] = useState<number | null>(null);
@@ -126,6 +128,9 @@ const MoviePage: React.FC = () => {
           <div className="movie-info">
             {moviePoster && (
               <img className="movie-poster" src={moviePoster} alt="" />
+            )}
+            {!moviePoster && (
+              <img className="movie-poster" src={posterImage} alt="" />
             )}
             <div className="movie-details">
               {movieInfo ? (

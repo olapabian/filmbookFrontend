@@ -26,7 +26,7 @@
     height: 200px;
     width: 500px;    
     margin-top: -70px;
-
+    justify-content: center;
     display: flex;
     flex-direction: row;
 }
@@ -42,7 +42,6 @@
     display: flex;
     flex-direction: row;
     justify-content: center; 
-    align-items:center; 
     width: 230px;
     background-color: $primary-clr;
     h1{
@@ -52,6 +51,7 @@
 }
 .close-icon-div-add-photo{
     display: flex;
+    justify-content: center;
     flex-direction: row; 
     justify-content: center; 
     margin-right: 0px;
@@ -67,6 +67,7 @@
 .add-photo-section{
     display: flex;
     flex-direction: column;
+    justify-content: center;
     background-color: $primary-clr;
     margin-top: 30px;
     margin-left: 15px;
@@ -74,15 +75,16 @@
         background-color: $primary-clr;
     }
     button{
-        background-color: $secondary-clr;
-        color: $light-yellow;
+        background-color: $light-yellow;
+    
+        color: black;
         margin-top: 30px;
-        margin-right: 300px;
+       
         padding: 7px;
         border-radius: 2px;
         border: none;
         &:hover{
-            background-color: $pr-gray;
+            background-color: $light-blue;
         }
     }
 }

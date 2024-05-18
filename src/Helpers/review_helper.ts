@@ -1,23 +1,26 @@
 import axios from "axios";
-import {UserInfo} from "../Helpers/user_info_helper"
+import { UserInfo } from "../Helpers/user_info_helper";
 import { MovieInfoDto } from "../Helpers/search_helper";
+
 axios.defaults.baseURL = 'http://localhost:8080';
 axios.defaults.headers.post["Content-Type"] = 'application/json';
 
 export const getAuthToken = (): string | null => {
     return window.localStorage.getItem("auth_token");
-}
+};
+
 export interface ReviewInfoResponse {
-    movieId: number,
-    userId: number,
-    stars: number,
-    content: string
+    movieId: number;
+    userId: number;
+    stars: number;
+    content: string;
 }
 
-export interface ReviewInfoResponseEdit {
-    stars: number,
-    content: string
+export interface EditReviewInfoResponse {
+    stars: number;
+    content: string;
 }
+
 export interface ReviewInfoDto {
     reviewId: number;
     stars: number;
@@ -42,7 +45,7 @@ export const addReview = async (reviewInfoResponse: ReviewInfoResponse) => {
             }
         });
     } catch (error) {
-        console.error("Błąd podczas dodawania recenzji: ", error);
+        console.error("Error adding review: ", error);
         throw error;
     }
 };
@@ -56,21 +59,24 @@ export const deleteReviewById = async (reviewId: string) => {
             }
         });
     } catch (error) {
-        console.error("Błąd podczas usuwania recenzji: ", error);
+        console.error("Error deleting review: ", error);
         throw error;
     }
 };
 
-export const editReviewById = async (reviewId: string, reviewInfoResponseEdit: ReviewInfoResponseEdit) => {
+export const editReviewById = async (reviewId: string, reviewInfoResponseEdit: EditReviewInfoResponse) => {
     try {
-        const token = getAuthToken();
+        const token = getAuthToken();    
+        console.log(reviewId);
+        console.log(reviewInfoResponseEdit.content);
+        console.log(reviewInfoResponseEdit.stars);
         await axios.patch(`/editReviewById/${reviewId}`, reviewInfoResponseEdit, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
         });
     } catch (error) {
-        console.error("Błąd podczas edytowania recenzji: ", error);
+        console.error("Error editing review: ", error);
         throw error;
     }
 };
@@ -169,6 +175,34 @@ export const getReviewsByUsersIds = async (userIds: string[]) => {
         return response.data;
     } catch (error) {
         console.error("Błąd podczas pobierania recenzji: ", error);
+        throw error;
+    }
+};
+
+export const addLike = async (reviewId: string, userId: string) => {
+    try {
+        const token = getAuthToken();
+        await axios.post(`/addLike/${reviewId}/${userId}`, {}, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+    } catch (error) {
+        console.error("Error adding like: ", error);
+        throw error;
+    }
+};
+
+export const removeLike = async (reviewId: string, userId: string) => {
+    try {
+        const token = getAuthToken();
+        await axios.post(`/removeLike/${reviewId}/${userId}`, {}, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+    } catch (error) {
+        console.error("Error removing like: ", error);
         throw error;
     }
 };

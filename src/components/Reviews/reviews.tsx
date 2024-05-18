@@ -15,6 +15,8 @@ import {
   getReviewsByMovieId,
   getReviewsByMovieIdAndUsersIds,
   ReviewInfoDto,
+  addLike,
+  removeLike,
 } from "../../Helpers/review_helper";
 import {
   UserInfo,
@@ -236,6 +238,56 @@ const Reviews: React.FC<ReviewsProps> = ({
   const handleGoToReviewBtnClick = (reviewId: number) => {
     navigate(`/review/${reviewId}`);
   };
+  const isReviewLikedByUser = (review: ReviewInfoDto): boolean => {
+    if (user && review.usersWhoLikedIds) {
+      const likedUsersArray = review.usersWhoLikedIds.split(";");
+      return likedUsersArray.includes(user.userId.toString());
+    }
+    return false;
+  };
+  const handleLikeButtonClickAddLike = async (review: ReviewInfoDto) => {
+    if (user) {
+      try {
+        await addLike(review.reviewId.toString(), user.userId.toString());
+
+        if (reviewType === "userReviews") {
+          await fetchUserReviews();
+        } else if (reviewType === "allMovieReviews") {
+          await fetchMovieReviews();
+        } else if (reviewType === "followingMovieReviews") {
+          await fetchMovieFriendsReviews();
+        } else if (reviewType === "myMovieReview") {
+          await fetchMovieMyReview();
+        } else if (reviewType === "followingReviews") {
+          await fetchFriendsReviews();
+        }
+      } catch (error) {
+        console.error("Error adding like or fetching reviews: ", error);
+      }
+    }
+  };
+
+  const handleLikeButtonClickRemoveLike = async (review: ReviewInfoDto) => {
+    if (user) {
+      try {
+        await removeLike(review.reviewId.toString(), user.userId.toString());
+
+        if (reviewType === "userReviews") {
+          await fetchUserReviews();
+        } else if (reviewType === "allMovieReviews") {
+          await fetchMovieReviews();
+        } else if (reviewType === "followingMovieReviews") {
+          await fetchMovieFriendsReviews();
+        } else if (reviewType === "myMovieReview") {
+          await fetchMovieMyReview();
+        } else if (reviewType === "followingReviews") {
+          await fetchFriendsReviews();
+        }
+      } catch (error) {
+        console.error("Error adding like or fetching reviews: ", error);
+      }
+    }
+  };
   // jeszcze dodac gwiazdki
   return (
     <div className="middle">
@@ -345,11 +397,29 @@ const Reviews: React.FC<ReviewsProps> = ({
             </div>
             {/*  */}
             <div className="review-reactions">
-              <div className="likes-count">
-                <p>{review.likes}</p>
-                <AiTwotoneLike />
-              </div>
-              <div className="comment-count">
+              {!isReviewLikedByUser(review) && (
+                <div
+                  className="likes-count"
+                  onClick={() => handleLikeButtonClickAddLike(review)}
+                >
+                  <p>{review.likes}</p>
+                  <AiTwotoneLike />
+                </div>
+              )}
+
+              {isReviewLikedByUser(review) && (
+                <div
+                  className="likes-count-active"
+                  onClick={() => handleLikeButtonClickRemoveLike(review)}
+                >
+                  <p>{review.likes}</p>
+                  <AiTwotoneLike />
+                </div>
+              )}
+              <div
+                className="comment-count"
+                onClick={() => handleGoToReviewBtnClick(review.reviewId)}
+              >
                 <p>{review.commentsCount}</p>
                 <FaCommentDots />
               </div>

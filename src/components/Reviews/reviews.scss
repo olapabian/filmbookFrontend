@@ -75,6 +75,7 @@
     background-color: $light-yellow;
     margin-left: auto;
     button{
+      padding: 7px;
       width: 100px;
       height: 30px;
       border-radius: 7px;
@@ -165,6 +166,8 @@
     margin-left: 30px;
     background-color: $light-yellow;
     gap:6px;
+    padding: 2px;
+    border-radius: 5px;
     p{
       font-size: 15px;
       background-color: $light-yellow;
@@ -176,8 +179,46 @@
       background-color: $light-yellow;
       font-size: 20px; /* zmiana rozmiaru ikony */
     }
+    &:hover{
+      background-color: $light-blue;
+      p{
+        background-color:  $light-blue;
+      }
+      svg{
+        background-color:  $light-blue;
+      }
+    }
   }
-
+  .likes-count-active{
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    margin-left: 30px;
+    background-color: $light-blue;
+    gap:6px;
+    padding: 2px;
+    border-radius: 5px;
+    p{
+      font-size: 15px;
+      background-color: $light-blue;
+      display: flex;
+      flex-direction: row;
+      margin-top: 3px;
+    }
+    svg {
+      background-color: $light-blue;
+      font-size: 20px; /* zmiana rozmiaru ikony */
+    }
+    &:hover{
+      background-color: $light-yellow;
+      p{
+        background-color:  $light-yellow;
+      }
+      svg{
+        background-color:  $light-yellow;
+      }
+    }
+  }
   .comment-count{
     margin-right: 30px;
     background-color: $light-yellow;
